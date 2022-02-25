@@ -11,19 +11,37 @@ public class MovingBar : MonoBehaviour
     private int unlocked = 0;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         startingPosition = transform.position;
+        int difficulty = Random.Range(1, 4);
+        if (difficulty == 1)
+        {
+            Speed = 0.5f;
+        }
+        if (difficulty == 2)
+        {
+            Speed = 1f;
+        }
+        if (difficulty == 3)
+        {
+            Speed = 2f;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 v = startingPosition;
-        v.x = distanceToCover * Mathf.Sin(Time.time * Speed);
-        transform.position = v;
+        //Debug.Log(gameObject.activeSelf);
+        if(gameObject.activeSelf == true)
+        {
+            Debug.Log(Speed);
+            Vector3 v = startingPosition;
+            v.x = distanceToCover * Mathf.Sin(Time.time * Speed);
+            transform.position = v;
 
-        Spacebar();
+            Spacebar();
+        }
     }
 
     void OnCollisionEnter(Collision collision)
