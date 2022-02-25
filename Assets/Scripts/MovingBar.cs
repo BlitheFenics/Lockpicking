@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MovingBar : MonoBehaviour
 {
-    [SerializeField] float distanceToCover;
-    [SerializeField] float Speed;
+    [SerializeField] float distanceToCover, Speed;
+    [SerializeField] GameObject Difficulty;
 
     private Vector3 startingPosition;
     private int unlocked = 0;
@@ -18,14 +19,17 @@ public class MovingBar : MonoBehaviour
         if (difficulty == 1)
         {
             Speed = 0.5f;
+            Difficulty.GetComponent<Text>().text = "Difficulty: Easy";
         }
         if (difficulty == 2)
         {
             Speed = 1f;
+            Difficulty.GetComponent<Text>().text = "Difficulty: Normal";
         }
         if (difficulty == 3)
         {
             Speed = 2f;
+            Difficulty.GetComponent<Text>().text = "Difficulty: Hard";
         }
     }
 
