@@ -35,7 +35,7 @@ public class MovingBar : MonoBehaviour
         //Debug.Log(gameObject.activeSelf);
         if(gameObject.activeSelf == true)
         {
-            Debug.Log(Speed);
+            //Debug.Log(Speed);
             Vector3 v = startingPosition;
             v.x = distanceToCover * Mathf.Sin(Time.time * Speed);
             transform.position = v;
