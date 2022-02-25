@@ -11,6 +11,9 @@ public class MovingBar : MonoBehaviour
     private Vector3 startingPosition;
     private int unlocked = 0;
 
+    public bool movePick = true;
+    public float keyPressTime = 0;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -45,6 +48,7 @@ public class MovingBar : MonoBehaviour
             transform.position = v;
 
             Spacebar();
+            keyPressTime = Mathf.Clamp(keyPressTime, 0, 1);
         }
     }
 
@@ -68,6 +72,13 @@ public class MovingBar : MonoBehaviour
             if (Input.GetKeyDown("space"))
             {
                 print("space key was pressed inside green bar");
+                movePick = false;
+                keyPressTime = 1;
+            }
+            if(Input.GetKeyUp("space"))
+            {
+                movePick = true;
+                keyPressTime = 0;
             }
         }
 
@@ -76,6 +87,7 @@ public class MovingBar : MonoBehaviour
             if (Input.GetKeyDown("space"))
             {
                 print("space key was pressed outside green bar");
+
             }
         }
     }

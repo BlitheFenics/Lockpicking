@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject bar, countdown, difficulty, begin, lose;
+    [SerializeField] GameObject bar, countdown, difficulty, begin, lose, lockPick, lockBase;
 
     private int minutes = 5, seconds = 0;
     public bool takingAway = false;
@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
         begin.SetActive(true);
         lose.SetActive(false);
         difficulty.SetActive(false);
+        lockBase.SetActive(false);
+        lockPick.SetActive(false);
         countdown.SetActive(false);
         countdown.GetComponent<Text>().text = "0" + minutes + ":0" + seconds;
     }
@@ -30,6 +32,8 @@ public class GameManager : MonoBehaviour
             bar.SetActive(true);
             begin.SetActive(false);
             difficulty.SetActive(true);
+            lockBase.SetActive(true);
+            lockPick.SetActive(true);
             countdown.SetActive(true);
             lose.SetActive(false);
         }
@@ -67,6 +71,8 @@ public class GameManager : MonoBehaviour
             bar.SetActive(false);
             begin.SetActive(false);
             difficulty.SetActive(false);
+            lockBase.SetActive(false);
+            lockPick.SetActive(false);
             countdown.SetActive(false);
             lose.SetActive(true);
         }
