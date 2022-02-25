@@ -10,6 +10,7 @@ public class LockPick : MonoBehaviour
     private MovingBar movingBarScript;
 
     public float maxAngle = 90, lockSpeed = 10;
+    public bool unlocked = false;
 
     [Min(1)] [Range(1, 25)]
     public float lockRange = 10;
@@ -60,11 +61,7 @@ public class LockPick : MonoBehaviour
         {
             if(eulerAngle < unlockRange.y && eulerAngle > unlockRange.x)
             {
-                Debug.Log("Unlocked");
-                newLock();
-
-                movingBarScript.movePick = true;
-                movingBarScript.keyPressTime = 0;
+                unlocked = true;
             }
             else
             {

@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject bar, countdown, difficulty, begin, lose, lockPick, lockBase;
+    [SerializeField] GameObject bar, countdown, difficulty, begin, lose, lockPick, lockBase, playerSkill, win;
+    private LockPick lockPickScript;
 
     private int minutes = 5, seconds = 0;
     public bool takingAway = false;
@@ -20,13 +21,34 @@ public class GameManager : MonoBehaviour
         difficulty.SetActive(false);
         lockBase.SetActive(false);
         lockPick.SetActive(false);
+        playerSkill.SetActive(false);
         countdown.SetActive(false);
         countdown.GetComponent<Text>().text = "0" + minutes + ":0" + seconds;
+        lockPickScript = lockPick.GetComponent<LockPick>();
+        win.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (lockPickScript.unlocked == true)
+        {
+            bar.SetActive(false);
+            begin.SetActive(false);
+            difficulty.SetActive(false);
+            lockBase.SetActive(false);
+            lockPick.SetActive(false);
+            playerSkill.SetActive(false);
+            countdown.SetActive(false);
+            lose.SetActive(false);
+            win.SetActive(true);
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                SceneManager.LoadScene(0);
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.E) && lose.activeSelf == false)
         {
             bar.SetActive(true);
@@ -34,8 +56,10 @@ public class GameManager : MonoBehaviour
             difficulty.SetActive(true);
             lockBase.SetActive(true);
             lockPick.SetActive(true);
+            playerSkill.SetActive(true);
             countdown.SetActive(true);
             lose.SetActive(false);
+            win.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.E) && lose.activeSelf == true)
@@ -73,8 +97,10 @@ public class GameManager : MonoBehaviour
             difficulty.SetActive(false);
             lockBase.SetActive(false);
             lockPick.SetActive(false);
+            playerSkill.SetActive(false);
             countdown.SetActive(false);
             lose.SetActive(true);
+            win.SetActive(false);
         }
 
         if (seconds < 10 && minutes >= 10)
